@@ -27,12 +27,12 @@ import retrofit2.Response;
 
 public class GithubRepository {
 
-    private final ProjectDao soundProfileDao;
+    private final ProjectDao projectDao;
     private final MyWebService myWebService;
 
     public GithubRepository(Application application, MyWebService myWebService) {
         ProjectRoomDatabase db = ProjectRoomDatabase.getDatabase(application);
-        this.soundProfileDao = db.soundProfileDao();
+        this.projectDao = db.projectDao();
         this.myWebService = myWebService;
     }
 
@@ -40,9 +40,9 @@ public class GithubRepository {
         return new NetworkBoundResource<List<Project>, List<Project>>() {
             @Override
             protected void saveCallResult(@NonNull List<Project> items) {
-                soundProfileDao.deleteAll();
+                projectDao.deleteAll();
                 for (int i = 0; i < items.size(); i++) {
-                    soundProfileDao.insert(items.get(i));
+                    projectDao.insert(items.get(i));
                 }
             }
 
@@ -54,7 +54,7 @@ public class GithubRepository {
             @NonNull
             @Override
             protected LiveData<List<Project>> loadFromDb() {
-                return soundProfileDao.getProjects();
+                return projectDao.getProjects();
             }
 
             @NonNull

@@ -11,7 +11,7 @@ import com.askjeffreyliu.mvvmsample.room.model.Project;
 @Database(entities = {Project.class}, version = 1, exportSchema = false)
 public abstract class ProjectRoomDatabase extends RoomDatabase {
 
-    public abstract ProjectDao soundProfileDao();
+    public abstract ProjectDao projectDao();
 
     private static ProjectRoomDatabase INSTANCE;
 
