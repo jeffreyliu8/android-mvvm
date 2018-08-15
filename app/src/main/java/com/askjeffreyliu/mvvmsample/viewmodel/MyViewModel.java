@@ -21,7 +21,7 @@ public class MyViewModel extends AndroidViewModel {
     @Inject
     MyWebService service;
 
-    private LiveData<Resource<List<Project>>> deviceConfigs;
+    private LiveData<Resource<List<Project>>> liveData;
 
     public MyViewModel(@NonNull Application application) {
         super(application);
@@ -31,11 +31,11 @@ public class MyViewModel extends AndroidViewModel {
                 .inject(this);
 
         GithubRepository githubRepository = new GithubRepository(application, service);
-        deviceConfigs = githubRepository.loadProjects();
+        liveData = githubRepository.loadProjects();
     }
 
     @NonNull
     public LiveData<Resource<List<Project>>> getDeviceConfigs() {
-        return deviceConfigs;
+        return liveData;
     }
 }
